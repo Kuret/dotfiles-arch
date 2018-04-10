@@ -1,0 +1,58 @@
+# # # # # # #
+#  General  #
+# # # # # # #
+
+HISTFILE=~/.config/zsh/.histfile
+HISTSIZE=99999
+SAVEHIST=4000
+setopt autocd extendedglob
+bindkey -v
+
+zstyle :compinstall filename '/home/rick/.zshrc'
+autoload -Uz compinit
+compinit
+
+
+# # # # # # #
+#  Exports  #
+# # # # # # #
+
+# Add the HOME bin directory to the PATH
+export PATH="${HOME}/bin:${PATH}"
+
+# Set default editor
+alias vi=nvim
+alias vim=nvim
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+
+
+# # # # # # #
+#    NPM    #
+# # # # # # #
+
+NPM_PACKAGES="${HOME}/.npm-packages"
+PATH="$NPM_PACKAGES/bin:$PATH"
+
+# Unset manpath so we can inherit from /etc/manpath via the `manpath` command
+unset MANPATH # delete if you already modified MANPATH elsewhere in your config
+export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+
+
+# # # # # # #
+#   Yarn    #
+# # # # # # #
+
+export PATH="$HOME/.yarn/bin:$PATH"
+
+
+# # # # # # # # # # #
+#  Alias/Functions  #
+# # # # # # # # # # #
+
+if [ -d ~/.zsh ]; then
+  for file in ~/.zsh/*.zsh; do
+    source $file
+  done
+fi
+
