@@ -3,6 +3,7 @@ set -e
 
 # Remove old links
 sudo rm -rf ~/.npmrc
+sudo rm -rf ~/.tmux.conf
 sudo rm -rf ~/.zshrc
 sudo rm -rf ~/.zsh
 sudo rm -rf ~/.config/nvim/init.vim
@@ -11,6 +12,7 @@ sudo rm -rf ~/.config/nvim/autoload
 
 # Create symlinks
 ln -sf $PWD/dotfiles/npmrc ~/.npmrc
+ln -sf $PWD/dotfiles/tmux.conf ~/.tmux.conf
 ln -sf $PWD/dotfiles/zshrc ~/.zshrc
 
 mkdir -p ~/.zsh
