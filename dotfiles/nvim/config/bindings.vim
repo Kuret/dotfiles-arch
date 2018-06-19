@@ -21,6 +21,7 @@ nnoremap <leader>r :source $MYVIMRC<CR>
 
 " ESC quits the terminal
 tnoremap <Esc> <C-\><C-n>:q<CR> 
+tnoremap <C-p> :CtrlP<CR> 
 
 " Toggle QuickFix
 nnoremap <leader>cc :call asyncrun#quickfix_toggle(8)<CR>
@@ -36,8 +37,8 @@ nnoremap <leader>qfo :copen<CR>
 nnoremap <leader>qfc :ccl<CR>
 
 " Splits
-nnoremap <silent> <leader>\ :vnew<CR>:Explore<CR>
-nnoremap <silent> <leader>- :new<CR>:Explore<CR>
+nnoremap <silent> <leader>\ :vnew<CR>:Ranger<CR>
+nnoremap <silent> <leader>- :new<CR>:Ranger<CR>
 
 " Navigation
 nnoremap <C-J> <C-W><C-J>
@@ -65,6 +66,10 @@ nnoremap <leader>b :BuffergatorToggle<CR>
 
 " Toggle the GitGutter
 nnoremap <leader>git :GitGutterToggle<CR>
+
+" Ranger
+let g:ranger_map_keys = 0
+nnoremap <silent> <leader>x :Ranger<CR>
 
 " Alchemist: Go to definition in new split and rebind go to Doc
 autocmd FileType ex,exs nnoremap <buffer> <leader>edf :split <bar> ExDef<CR>

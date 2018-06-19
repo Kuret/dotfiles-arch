@@ -10,6 +10,12 @@ if executable('rg')
   let g:ctrlp_use_caching = 0
 endif
 
+" Use ranger instead of netrw
+let g:ranger_replace_netrw = 1
+
+" Show hidden files in ranger
+let g:ranger_command_override = 'ranger --cmd "set show_hidden=true"'
+
 " Disable gitgutter by default
 let g:gitgutter_enabled = 0
 

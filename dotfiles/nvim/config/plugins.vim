@@ -27,6 +27,8 @@ Plug 'slashmili/alchemist.vim'
 Plug 'mhinz/vim-mix-format'
 
 " Navigation
+Plug 'rbgrouleff/bclose.vim'
+Plug 'francoiscabrol/ranger.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'

@@ -1,3 +1,6 @@
+alias ls="ls_extended"
+alias lsl="ls_extended -l"
+
 alias gst="git status"
 alias gp="git push"
 alias gpr="git pull --rebase"
@@ -21,6 +24,7 @@ alias zshe="pushd ~/.zsh && nvim && popd"
 alias zshc="pushd ~ && nvim ~/.zshrc && popd"
 alias nvime="pushd ~/.config/nvim && nvim && popd"
 
+alias poke="cat /usr/share/pokeshell/\$((\$RANDOM % 151 + 1)).pokemon"
 
 # # # # # # # # # # # #
 #  Function aliases   #

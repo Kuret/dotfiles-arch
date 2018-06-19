@@ -37,7 +37,7 @@ set tabstop=2                         " use two spaces for tabs
 " background processes
 set autoread                          " update file when changed outside of vim
 set autoindent                        " copy indentation from the previous line for new line
-set clipboard=unnamed                 " use native clipboard
+set clipboard+=unnamedplus            " use native clipboard
 set nobackup                          " don't save backups
 set noerrorbells                      " no error bells please
 set noswapfile                        " no swapfiles
@@ -53,9 +53,17 @@ if !&readonly && &modifiable
 endif
   set encoding=utf-8                  " the encoding displayed
 
+" Search into subfolders
+set path+=**
+
+" Display all matching files when tab completing
+set wildmenu
+
 " omni completion
 set omnifunc=syntaxcomplete#Complete
 set completeopt=longest,menuone
+
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 
 " Triger `autoread` when files changes on disk
 " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
