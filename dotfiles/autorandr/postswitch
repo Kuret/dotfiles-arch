@@ -1,0 +1,6 @@
+#!/bin/bash
+
+pkill -9 -f touchgreat.py
+sleep 2
+nitrogen --restore
+exec /home/rick/git/touchgreat/touchgreat.py &
