@@ -7,6 +7,7 @@ Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/SyntaxRange'
 Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'bogado/file-line'
 
 " Snippets
 Plug 'SirVer/ultisnips'

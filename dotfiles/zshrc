@@ -1,5 +1,7 @@
-# Tmux
-[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session && exit;}
+# Autostart WM
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+    exec startx
+fi
 
 # # # # # # #
 #  General  #
@@ -36,13 +38,11 @@ export RANGER_LOAD_DEFAULT_RC=FALSE
 # # # # # # #
 
 NPM_PACKAGES="${HOME}/.npm-packages"
-PATH="$NPM_PACKAGES/bin:$PATH"
+export PATH="$NPM_PACKAGES/bin:$PATH"
 
 # Unset manpath so we can inherit from /etc/manpath via the `manpath` command
 unset MANPATH # delete if you already modified MANPATH elsewhere in your config
 export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
-
-source /usr/share/nvm/init-nvm.sh
 
 # # # # # # #
 #   Yarn    #
@@ -50,18 +50,15 @@ source /usr/share/nvm/init-nvm.sh
 
 export PATH="$HOME/.yarn/bin:$PATH"
 
-# # # # # # #
-#   Ruby    #
-# # # # # # #
-
-export PATH="$HOME/.gem/ruby/2.5.0/bin:$PATH"
+# Asdf
+source $HOME/.asdf/asdf.sh
+$HOME/.asdf/completions/asdf.bash
 
 
 # # # # # # # # # # #
 #  Alias/Functions  #
 # # # # # # # # # # #
 
-alias be="bundle exec"
 if [ -d ~/.zsh ]; then
   for file in ~/.zsh/*.zsh; do
     source $file

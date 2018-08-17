@@ -24,8 +24,6 @@ alias zshe="pushd ~/.zsh && nvim && popd"
 alias zshc="pushd ~ && nvim ~/.zshrc && popd"
 alias nvime="pushd ~/.config/nvim && nvim && popd"
 
-alias poke="cat /usr/share/pokeshell/\$((\$RANDOM % 151 + 1)).pokemon"
-
 # # # # # # # # # # # #
 #  Function aliases   #
 # # # # # # # # # # # #

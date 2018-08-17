@@ -78,4 +78,3 @@ source $HOME/.config/nvim/config/plugins.vim " Load plugins
 source $HOME/.config/nvim/config/bindings.vim " Load bindings
 source $HOME/.config/nvim/config/theme.vim " Load theme
 source $HOME/.config/nvim/config/plugins-config.vim " Load plugin settings
-

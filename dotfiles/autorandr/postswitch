@@ -1,6 +1,5 @@
 #!/bin/bash
 
-pkill -9 -f touchgreat.py
 sleep 2
+exec ~/bin/poly.sh
 nitrogen --restore
-exec /home/rick/git/touchgreat/touchgreat.py &
