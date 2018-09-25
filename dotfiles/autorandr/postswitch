@@ -1,5 +1,6 @@
 #!/bin/bash
 
-sleep 2
-exec ~/bin/poly.sh
+#sleep 5
 nitrogen --restore
+eval $HOME/bin/poly.sh
+eval $HOME/.config/bspwm/bspwmrc

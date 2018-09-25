@@ -1,0 +1,79 @@
+#! /bin/sh
+I=1
+M=$(bspc query -M | wc -l)
+W=$(bspc query -D | wc -l)
+
+# Always create 10 desktops
+if [[ "$W" -lt 10 ]]; then
+  bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+  bspc desktop Desktop -r
+fi
+
+if [[ "$M" -gt 1 ]]; then
+  # Split 10 desktops between X monitors
+  MONITORS=$(bspc query -M | wc -l)
+  WS=$($HOME/bin/eqdiv 10 $MONITORS)
+  FIRST=$(echo "$WS" | sed -n 1p)
+
+  seq $FIRST | xargs -I{} bspc desktop {} -m eDP1
+  bspc desktop Desktop -r
+
+  COUNT=2
+  NUM=$(($FIRST+1))
+  for monitor in $(bspc query -M --names | sed '/eDP1/d'); do
+    echo "MONITOR:$monitor" >> WTF.txt
+    ADD=$(echo "$WS" | sed -n ${COUNT}p)
+
+    seq $NUM $(($NUM+$ADD-1)) | xargs -I{} bspc desktop {} -m $monitor
+    bspc desktop Desktop -r
+
+    NUM=$(($NUM+$ADD))
+    let COUNT++
+  done
+fi
+
+# Hardcoded for 2 monitors
+#elif [[ "$M" == 2 ]]; then
+#  # Split 10 desktops between 2 monitors
+#  OM=$(bspc query -M --names | sed '/eDP1/d')
+#
+#  bspc desktop 6 -m $OM
+#  bspc desktop 7 -m $OM
+#  bspc desktop 8 -m $OM
+#  bspc desktop 9 -m $OM
+#  bspc desktop 10 -m $OM
+#
+#  bspc desktop Desktop -r
+
+
+bspc config pointer_follows_monitor true
+
+bspc config remove_unplugged_monitors true
+bspc config remove_disabled_monitors true
+bspc config merge_overlapping_monitors true
+
+bspc config normal_border_color "#282828"
+bspc config focused_border_color "#ebdbb2"
+bspc config active_border_color "#a89984"
+bspc config presel_feedback_color "#504945"
+
+bspc config border_width 0
+bspc config window_gap 12
+
+bspc config top_padding 27
+
+bspc config single_monocle true
+bspc config borderless_monocle true
+bspc config gapless_monocle true
+
+bspc rule -a Screenkey manage=off
+bspc rule -a Firefox desktop=2
+bspc rule -a Google-chrome desktop=2
+bspc rule -a qutebrowser desktop=2
+
+bspc rule -a Spotify desktop=5
+bspc rule -a HipChat desktop=10
+bspc rule -a Nextcloud desktop=10
+
+bspc config external_rules_command ~/.config/bspwm/external_rules
+

@@ -1,0 +1,34 @@
+#!/bin/sh
+
+wid=$1
+class=$2
+instance=$3
+title=$(xtitle "$wid")
+
+MONITOR=$(bspc query -M -m focused --names)
+M_SIZE=($(xrandr | grep $MONITOR | grep -w connected | sed 's/primary //' | awk -F'[ x+]' '{print $3,$4,$5,$6}'))
+screenWidth=${M_SIZE[0]}
+screenHeight=${M_SIZE[1]}
+screenOffsetX=${M_SIZE[2]}
+screenOffsetY=${M_SIZE[3]}
+
+case "$class" in
+  Alacritty )
+    case "$instance" in
+      mtest )
+        echo "state=floating"
+        xdotool windowsize $wid 600 300
+        newPosX=$((screenWidth/2-300+screenOffsetX))
+        newPosY=$((screenHeight-300-screenHeight/20))
+        xdotool windowmove $wid "$newPosX" "$newPosY"
+        ;;
+      fzf )
+        echo "state=floating"
+        xdotool windowsize $wid 1000 500
+        newPosX=$((screenWidth/2-500+screenOffsetX))
+        newPosY=$((screenHeight/10))
+        xdotool windowmove $wid "$newPosX" "$newPosY"
+        ;;
+    esac
+    ;;
+esac
