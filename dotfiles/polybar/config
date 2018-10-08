@@ -1,0 +1,185 @@
+[colors]
+background = #BF000000
+background-alt = #3c3836
+foreground = #ebdbb2
+foreground-alt = #a89984
+primary = #458588
+secondary = #689d6a
+warning = #d65d0e
+alert = #cc241d
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+[bar/main]
+monitor = ${env:MONITOR:}
+width = 100%
+height = 27
+
+font-0 = Consolas Nerd Font:pixelsize=12;2
+background = ${colors.background}
+foreground = ${colors.foreground}
+cursor-click = pointer
+
+padding-left = 1
+padding-right = 3
+module-margin = 2
+
+#scroll-down = i3wm-wsprev
+#scroll-up = i3wm-wsnext
+
+scroll-up = bspwm-desknext
+scroll-down = bspwm-deskprev
+
+modules-left = bspwm
+modules-center =
+modules-right = player alsa pulseaudio backlight battery wlan eth date
+
+wm-restack = bspwm
+
+[module/player]
+type = custom/script
+exec = ~/bin/polybar/player/player-mpris-tail.py
+tail = true
+click-left = ~/bin/polybar/player/player-ctrl.sh previous
+click-right = ~/bin/polybar/player/player-ctrl.sh next
+click-middle = ~/bin/polybar/player/player-ctrl.sh play-pause
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+
+label-focused = 
+label-unfocused = 
+label-visible = 
+label-urgent = 
+
+label-background = ${colors.background}
+label-urgent-background = ${colors.alert}
+
+label-focused-padding = 1
+label-unfocused-padding = 1
+label-visible-padding = 1
+label-urgent-padding = 1
+
+wrapping-scroll = false
+reverse-scroll = false
+pin-workspaces = true
+
+[module/bspwm]
+type = internal/bspwm
+format = <label-state>
+
+label-focused =  %name%
+label-empty =  %name%
+label-occupied =  %name%
+label-urgent =  %name%
+
+label-background = ${colors.background}
+label-urgent-background = ${colors.alert}
+
+label-separator = " "
+label-separator-padding = 1
+
+reverse-scroll = false
+pin-workspaces = true
+
+[module/workspaces]
+type = internal/xworkspaces
+format = <label-state>
+
+label-active = "  %name%"
+label-empty = "  %name%"
+label-occupied = "  %name%"
+label-urgent = "  %name%"
+
+label-background = ${colors.background}
+label-urgent-background = ${colors.alert}
+
+pin-workspaces = true
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+
+format = <label>
+label = "  %percentage%%"
+
+[module/wlan]
+type = internal/network
+interface = wlp2s0
+interval = 3.0
+
+label-connected =  %essid%
+
+[module/eth]
+type = internal/network
+interface = eth0
+interval = 3.0
+
+label-connected = 
+label-connected-foreground = ${colors.secondary}
+
+[module/date]
+type = internal/date
+label = %date% %time%
+
+date = %d %b
+time = %H:%M
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+sink = default
+use-ui-max = false
+
+format-volume = <label-volume>
+label-volume = "  %percentage%%"
+label-muted = "  muted"
+
+label-volume-foreground = ${colors.foreground}
+label-muted-foreground = ${colors.foreground-alt}
+
+[module/alsa]
+type = internal/alsa
+
+format-volume = <label-volume>
+label-muted = "  muted"
+label-volume = "  %percentage%%"
+
+label-muted-foreground = ${colors.foreground-alt}
+
+master-soundcard = hw:0
+speaker-soundcard = hw:0
+headphone-soundcard = hw:0
+
+master-mixer = Master
+speaker-mixer = Speaker
+headphone-mixer = Headphone
+
+headphone-id = 15
+
+mapped = true
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 98
+
+format-charging = <ramp-capacity> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+
+label-charging = %percentage%% +
+label-discharging = %percentage%% (%time%)
+
+format-full-prefix = " "
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+
+[settings]
+screenchange-reload = true
+
+; vim:ft=dosini

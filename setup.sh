@@ -13,6 +13,7 @@ sudo rm -rf ~/.config/kak/kakrc
 sudo rm -rf ~/.config/nvim/init.vim
 sudo rm -rf ~/.config/nvim/config
 sudo rm -rf ~/.config/nvim/autoload
+sudo rm -rf ~/.config/polybar/config
 sudo rm -rf ~/.config/qutebrowser/config.py
 sudo rm -rf ~/.config/qutebrowser/darculized-all-sites.css
 sudo rm -rf ~/.config/ranger/rc.conf
@@ -43,6 +44,9 @@ mkdir -p ~/.config/nvim
 ln -sf $PWD/dotfiles/nvim/init.vim ~/.config/nvim/init.vim
 ln -sf $PWD/dotfiles/nvim/config ~/.config/nvim
 ln -sf $PWD/dotfiles/nvim/autoload ~/.config/nvim
+
+mkdir -p ~/.config/polybar
+ln -sf $PWD/dotfiles/polybar/config ~/.config/polybar/config
 
 mkdir -p ~/.config/qutebrowser
 ln -sf $PWD/dotfiles/qutebrowser/config.py ~/.config/qutebrowser/config.py
