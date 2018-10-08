@@ -2,6 +2,7 @@
 set -e
 
 # Remove old links
+sudo rm -rf ~/.Xresources
 sudo rm -rf ~/.config/alacritty/alacritty.yml
 sudo rm -rf ~/.config/autorandr
 sudo rm -rf ~/.config/bspwm
@@ -15,6 +16,8 @@ sudo rm -rf ~/.config/ranger/rc.conf
 sudo rm -rf ~/.config/ranger/scope.sh
 sudo rm -rf ~/.config/sxhkd
 sudo rm -rf ~/.config/twmn/twmn.conf
+
+ln -sf $PWD/dotfiles/.Xresources ~/.Xresources
 
 mkdir -p ~/.config
 ln -sf $PWD/dotfiles/autorandr ~/.config

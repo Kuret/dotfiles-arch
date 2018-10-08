@@ -1,0 +1,21 @@
+bspwm
+kakoune -> ports
+erlang
+elixir -> asdf
+nodejs -> asdf
+alacritty
+fish
+qutebrowser
+firefox/ungoogled-chromium
+ranger
+rofi
+compton
+clay
+flashfocus
+slock/i3lock-next/xfce-lock?
+keepassxc
+screenkey
+remmina
+sublime
+polybar? dunst?
+ls_extended
