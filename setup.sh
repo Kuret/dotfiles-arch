@@ -5,6 +5,8 @@ set -e
 sudo rm -rf ~/.config/alacritty/alacritty.yml
 sudo rm -rf ~/.config/autorandr
 sudo rm -rf ~/.config/bspwm
+sudo rm -rf ~/.config/fish/config.fish
+sudo rm -rf ~/.config/fish/functions/fish_prompt.fish
 sudo rm -rf ~/.config/kak/kakrc
 sudo rm -rf ~/.config/nvim/init.vim
 sudo rm -rf ~/.config/nvim/config
@@ -21,6 +23,10 @@ ln -sf $PWD/dotfiles/sxhkd ~/.config
 
 mkdir -p ~/.config/alacritty
 ln -sf $PWD/dotfiles/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+
+mkdir -p ~/.config/fish/functions
+ln -sf $PWD/dotfiles/fish/config.fish ~/.config/fish/config.fish
+ln -sf $PWD/dotfiles/fish/functions/fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
 
 mkdir -p ~/.config/kak
 ln -sf $PWD/dotfiles/kak/kakrc ~/.config/kak/kakrc

@@ -4,7 +4,7 @@ super + Escape
 
 # Screen lock
 super + shift + z
-  slock
+  i3lock-next
 
 # Screenkey
 super + o
@@ -20,21 +20,26 @@ super + Return
 super + @space
  rofi -show combi
 
+super + p
+  $HOME/bin/1p lit_bo rofi
+
+super + shift + p
+  $HOME/bin/1p defacto rofi
 
 # Media Keys
 
 # Media controls
-super + XF86AudioPlay
-  $HOME/bin/spt list Casual
+#super + XF86AudioPlay
+#  $HOME/bin/spt list Casual
 
-XF86AudioPlay
- playerctl play-pause
+#XF86AudioPlay
+# playerctl play-pause
 
-XF86AudioNext
- playerctl next
+#XF86AudioNext
+# playerctl next
 
-XF86AudioPrev
- playerctl previous
+#XF86AudioPrev
+# playerctl previous
 
 # Volume
 XF86AudioRaiseVolume
