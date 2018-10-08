@@ -1,0 +1,120 @@
+#!/bin/bash
+
+if [ "$#" -lt 1 ]; then
+  echo "Missing arguments"
+  exit 0
+fi
+
+SCRIPT_LOC=$(readlink -f "$0")
+
+get_token ()
+{
+  if [[ -f /tmp/1p_token_${1} && $(($(printf '%(%s)T\n' -1)-$(stat -c %Y /tmp/1p_token_${1}))) -lt 1500 ]]; then
+    echo "Getting existing token..."
+    TOKEN=$(cat /tmp/1p_token_${1})
+  elif [ "$2" = "rofi" ]; then
+    rofi_token $1
+  else
+    echo "Generating new token..."
+    TOKEN=$(op signin $1 --output=raw)
+    echo $TOKEN > /tmp/1p_token_${1}
+  fi
+}
+
+get_items ()
+{
+  ITEMS=$(op list items --session=$TOKEN)
+  if [ $? -eq 0 ]; then
+    ITEMS=$(echo $ITEMS | jq '.[] | .overview.title' | sed '/^"Password"$/d' | sed "s/^\(\"\)\(.*\)\1\$/\2/g")
+  else
+    refresh_token $@
+  fi
+}
+
+rofi_token ()
+{
+  RPASS=$(echo "Enter Password for ${1}:" | rofi -dmenu -password -p "1Password")
+  [ "$RPASS" = "" ] && exit
+
+  TOKEN=$(echo $RPASS | op signin $1 --output=raw)
+  echo $TOKEN > /tmp/1p_token_${1}
+}
+
+refresh_token ()
+{
+  rm /tmp/1p_token_${1}
+
+  [ "$2" = "rofi" ] && rofi_token $1 || echo "Token expired..."
+
+  exec $SCRIPT_LOC $@
+  exit
+}
+
+get_token $1 $2
+
+case $2 in
+  rofi)
+    get_items $@
+
+    ITEM=$(echo "$ITEMS" | rofi -dmenu -i -p "1Password")
+    [ "$ITEM" = "" ] && exit
+    exec $SCRIPT_LOC $1 get $ITEM type
+    ;;
+  list)
+    get_items $@
+    echo "$ITEMS"
+    ;;
+  get)
+    ITEM=$(op get item $3 --session=$TOKEN)
+    if [ $? -eq 0 ]; then
+      OP_PASS=$(echo $ITEM | jq '.details.fields[] | select(.designation=="password").value' | sed "s/^\(\"\)\(.*\)\1\$/\2/g")
+      OP_USER=$(echo $ITEM | jq '.details.fields[] | select(.designation=="username").value' | sed "s/^\(\"\)\(.*\)\1\$/\2/g")
+      OP_SITE=$(echo $ITEM | jq '.details.fields[] | select(.designation=="website").value' | sed "s/^\(\"\)\(.*\)\1\$/\2/g")
+
+      case $4 in
+        ''|p|pw|pass|password)
+          echo "Copying password to clipboard..."
+          echo $OP_PASS | xsel
+          ;;
+        u|id|user|uname|username)
+          echo "Copying username to clipboard..."
+          echo $OP_USER | xsel
+          ;;
+        w|web|site|website|url|uri)
+          echo "Copying url to clipboard..."
+          echo $OP_SITE | xsel
+          ;;
+        type)
+          echo "Running autotype script"
+
+          if [ -f $HOME/.1p_autotype ]; then
+            W_TITLE=$(xdotool getwindowfocus getwindowname)
+            W_CLASS=$(xprop -id $(xdotool getwindowfocus) WM_CLASS | awk '{print $4}' | sed "s/^\(\"\)\(.*\)\1\$/\2/g")
+            W_TITLE=${W_TITLE,,}
+            W_CLASS=${W_CLASS,,}
+            . $HOME/.1p_autotype
+          else
+            xdotool type "$OP_USER"
+            xdotool key Tab
+            xdotool type "$OP_PASS"
+          fi
+
+          OP_TOTP=$(op get totp $3 --session=$TOKEN)
+          [ -n "$OP_TOTP" ] && notify-send "TOTP copied to clipboard" && echo $OP_TOTP | xsel
+          ;;
+      esac
+    else
+      rm /tmp/1p_token_${1}
+      echo "Token expired..."
+      exec $SCRIPT_LOC $@
+      exit
+    fi
+    ;;
+  otp)
+    echo "Copying TOTP to clipboard..."
+    op get totp $3 --session=$TOKEN | xsel
+    ;;
+  '')
+    echo "NO ARGS"
+    ;;
+esac

@@ -3,6 +3,7 @@ set -e
 
 # Remove old links
 sudo rm -rf ~/.Xresources
+sudo rm -rf ~/bin
 sudo rm -rf ~/.config/alacritty/alacritty.yml
 sudo rm -rf ~/.config/autorandr
 sudo rm -rf ~/.config/bspwm
@@ -12,12 +13,16 @@ sudo rm -rf ~/.config/kak/kakrc
 sudo rm -rf ~/.config/nvim/init.vim
 sudo rm -rf ~/.config/nvim/config
 sudo rm -rf ~/.config/nvim/autoload
+sudo rm -rf ~/.config/qutebrowser/config.py
+sudo rm -rf ~/.config/qutebrowser/darculized-all-sites.css
 sudo rm -rf ~/.config/ranger/rc.conf
 sudo rm -rf ~/.config/ranger/scope.sh
 sudo rm -rf ~/.config/sxhkd
 sudo rm -rf ~/.config/twmn/twmn.conf
 
 ln -sf $PWD/dotfiles/.Xresources ~/.Xresources
+ln -sf $PWD/dotfiles/bin $HOME
+chmod +x $HOME/bin/*
 
 mkdir -p ~/.config
 ln -sf $PWD/dotfiles/autorandr ~/.config
@@ -38,6 +43,10 @@ mkdir -p ~/.config/nvim
 ln -sf $PWD/dotfiles/nvim/init.vim ~/.config/nvim/init.vim
 ln -sf $PWD/dotfiles/nvim/config ~/.config/nvim
 ln -sf $PWD/dotfiles/nvim/autoload ~/.config/nvim
+
+mkdir -p ~/.config/qutebrowser
+ln -sf $PWD/dotfiles/qutebrowser/config.py ~/.config/qutebrowser/config.py
+ln -sf $PWD/dotfiles/qutebrowser/darculized-all-sites.css ~/.config/qutebrowser/darculized-all-sites.css
 
 mkdir -p ~/.config/ranger
 ln -sf $PWD/dotfiles/ranger/rc.conf ~/.config/ranger/rc.conf

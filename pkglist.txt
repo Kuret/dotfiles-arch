@@ -3,6 +3,8 @@ kakoune -> ports
 erlang
 elixir -> asdf
 nodejs -> asdf
+postgresql10-server
+postgresql10-contrib
 alacritty
 fish
 qutebrowser
@@ -17,5 +19,6 @@ keepassxc
 screenkey
 remmina
 sublime
+inotify-tools
 polybar? dunst?
 ls_extended

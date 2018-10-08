@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Searches files using Rofi
+# Requires RipGrep and Rofi
+rg -L --sort-files --files --no-messages $@ | rofi -dmenu -matching fuzzy -sort -p files -l 15 -font 'Consolas Nerd Font 12' -width 25
