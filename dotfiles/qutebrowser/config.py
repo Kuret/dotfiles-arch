@@ -12,21 +12,7 @@ c.tabs.padding = {
   "right": 5
 }
 
-config.bind(":b", "hint all tab-bg")
-config.bind(":f", "hint all tab-fg")
-config.bind(":h", "hint all hover")
-config.bind(":i", "hint images")
-config.bind(":I", "hint images tab")
-config.bind(":o", "hint links fill :open {hint-url}")
-config.bind(":O", "hint links fill :open -t -i {hint-url}")
-config.bind(":y", "hint links yank")
-config.bind(":Y", "hint links yank-primary")
-config.bind(":r", "hint --rapid links tab-bg")
-config.bind(":R", "hint --rapid links window")
-config.bind(":d", "hint links download")
-config.bind(":t", "hint inputs")
-
-config.bind(":v", "hint links spawn mpv --ontop --no-border --screen=0 --geometry=25%-10-10 --keep-open {hint-url}")
+config.bind(";v", "hint links spawn mpv --ontop --no-border --screen=0 --geometry=25%-10-20 --keep-open {hint-url}")
 
 config.bind("<Ctrl-d>", "config-cycle content.user_stylesheets darculized-all-sites.css ''")
 config.bind("<Alt-t>", "config-cycle tabs.position left top")
