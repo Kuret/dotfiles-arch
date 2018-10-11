@@ -32,19 +32,6 @@ if [[ "$M" -gt 1 ]]; then
   done
 fi
 
-# Hardcoded for 2 monitors
-#elif [[ "$M" == 2 ]]; then
-#  # Split 10 desktops between 2 monitors
-#  OM=$(bspc query -M --names | sed '/eDP1/d')
-#
-#  bspc desktop 6 -m $OM
-#  bspc desktop 7 -m $OM
-#  bspc desktop 8 -m $OM
-#  bspc desktop 9 -m $OM
-#  bspc desktop 10 -m $OM
-#
-#  bspc desktop Desktop -r
-
 
 bspc config pointer_follows_monitor true
 
@@ -75,5 +62,15 @@ bspc rule -a Spotify desktop=5
 bspc rule -a HipChat desktop=10
 bspc rule -a Nextcloud desktop=10
 
+bspc rule -a mpv state=floating
+
 bspc config external_rules_command ~/.config/bspwm/external_rules
 
+# Hotkeys
+
+export SXHKD_SHELL=/usr/bin/bash
+killall sxhkd || true
+sxhkd &
+
+# Panel
+~/bin/poly.sh

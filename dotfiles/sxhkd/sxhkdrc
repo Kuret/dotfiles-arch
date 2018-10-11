@@ -4,7 +4,7 @@ super + Escape
 
 # Screen lock
 super + shift + z
-  i3lock-next
+  slock
 
 # Screenkey
 super + o
