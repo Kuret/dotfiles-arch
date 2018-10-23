@@ -13,6 +13,14 @@ set global indentwidth 2
 # Autoreload externally modified files
 set global autoreload yes
 
+# Clipboard share
+hook global NormalKey y|d|c %{ nop %sh{
+  printf %s "$kak_main_reg_dquote" | xsel --input --clipboard
+}}
+
+map global normal P '!xsel --output --clipboard<ret>'
+map global normal p '<a-!>xsel --output --clipboard<ret>'
+
 # Insert spaces instead of tabs
 hook global InsertChar \t %{ exec -draft -itersel h@ } -group kakrc-replace-tabs-with-spaces
 

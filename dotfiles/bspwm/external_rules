@@ -31,4 +31,10 @@ case "$class" in
         ;;
     esac
     ;;
+  qutebrowser ) echo "desktop=2" ;;
+  HipChat ) echo "desktop=10" ;;
+  NextCloud ) echo "desktop=10" ;;
+  Screenkey ) echo "manage=off" ;;
+  stalonetray ) echo "hidden=on" ;;
+  mpv ) echo "state=floating" ;;
 esac

@@ -1,5 +1,6 @@
 c.window.title_format = "{perc}{title}{title_sep}{host}{title_sep}qutebrowser"
 c.auto_save.session = True
+c.scrolling.smooth = True
 
 c.tabs.position = "left"
 c.tabs.background = True
@@ -11,6 +12,9 @@ c.tabs.padding = {
   "left": 5,
   "right": 5
 }
+
+config.bind("<Ctrl-Shift-j>", "scroll-page 0 0.5")
+config.bind("<Ctrl-Shift-k>", "scroll-page 0 -0.5")
 
 config.bind(";v", "hint links spawn mpv --ontop --no-border --screen=0 --geometry=25%-10-20 --keep-open {hint-url}")
 

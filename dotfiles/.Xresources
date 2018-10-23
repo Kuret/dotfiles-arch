@@ -1,9 +1,9 @@
 ! X11 style
-Xcursor.theme: capitaine-cursors
+Xcursor.theme: Breeze_Obsidian
 Xcursor.size: 16
 
 ! Rofi
-rofi.terminal: st
+rofi.terminal: alacritty
 rofi.combi-modi: window,drun,run
 rofi.modi: window,drun,run,ssh,combi
 rofi.show-icons: true

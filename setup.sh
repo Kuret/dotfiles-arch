@@ -10,6 +10,7 @@ sudo rm -rf ~/.config/libinput-gestures.conf
 sudo rm -rf ~/.config/alacritty/alacritty.yml
 sudo rm -rf ~/.config/autorandr
 sudo rm -rf ~/.config/bspwm
+sudo rm -rf ~/.config/dunst
 sudo rm -rf ~/.config/fish/config.fish
 sudo rm -rf ~/.config/fish/functions/fish_prompt.fish
 sudo rm -rf ~/.config/flashfocus/flashfocus.yml
@@ -39,6 +40,9 @@ ln -sf $PWD/dotfiles/sxhkd ~/.config
 
 mkdir -p ~/.config/alacritty
 ln -sf $PWD/dotfiles/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+
+mkdir -p ~/.config/dunst
+ln -sf $PWD/dotfiles/dunst/dunstrc ~/.config/dunst/dunstrc
 
 mkdir -p ~/.config/fish/functions
 ln -sf $PWD/dotfiles/fish/config.fish ~/.config/fish/config.fish

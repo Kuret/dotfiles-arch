@@ -1,5 +1,6 @@
 [colors]
-background = #BF000000
+background = #282828
+#background = #00000000
 background-alt = #3c3836
 foreground = #ebdbb2
 foreground-alt = #a89984
@@ -17,24 +18,48 @@ monitor = ${env:MONITOR:}
 width = 100%
 height = 27
 
-font-0 = Consolas Nerd Font:pixelsize=12;2
+font-0 = Consolas Nerd Font:pixelsize=12;3
 background = ${colors.background}
 foreground = ${colors.foreground}
 cursor-click = pointer
 
 padding-left = 1
-padding-right = 3
+padding-right = 2
 module-margin = 2
-
-#scroll-down = i3wm-wsprev
-#scroll-up = i3wm-wsnext
 
 scroll-up = bspwm-desknext
 scroll-down = bspwm-deskprev
 
 modules-left = bspwm
 modules-center =
-modules-right = player alsa pulseaudio backlight battery wlan eth date
+modules-right = pulseaudio backlight battery wlan eth date
+
+#tray-position = right
+#tray-offset-y = 0
+#tray-offset-x = 0
+
+wm-restack = bspwm
+
+[bar/secondary]
+monitor = ${env:MONITOR:}
+width = 100%
+height = 27
+
+font-0 = Consolas Nerd Font:pixelsize=12;3
+background = ${colors.background}
+foreground = ${colors.foreground}
+cursor-click = pointer
+
+padding-left = 1
+padding-right = 2
+module-margin = 2
+
+scroll-up = bspwm-desknext
+scroll-down = bspwm-deskprev
+
+modules-left = bspwm
+modules-center =
+modules-right = pulseaudio backlight battery wlan eth date
 
 wm-restack = bspwm
 
@@ -89,15 +114,15 @@ pin-workspaces = true
 type = internal/xworkspaces
 format = <label-state>
 
-label-active = "  %name%"
-label-empty = "  %name%"
-label-occupied = "  %name%"
-label-urgent = "  %name%"
+label-active = "  %name% "
+label-empty = "  %name% "
+label-occupied = "  %name% "
+label-urgent = "  %name% "
 
 label-background = ${colors.background}
 label-urgent-background = ${colors.alert}
 
-pin-workspaces = true
+pin-workspaces = false
 
 [module/backlight]
 type = internal/backlight
@@ -132,7 +157,7 @@ time = %H:%M
 type = internal/pulseaudio
 
 sink = default
-use-ui-max = false
+use-ui-max = true
 
 format-volume = <label-volume>
 label-volume = "  %percentage%%"

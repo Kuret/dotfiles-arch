@@ -1,0 +1,8 @@
+#!/bin/bash
+xmlURL="http://www.bing.com/HPImageArchive.aspx?format=xml&idx=0&n=1&mkt=en-WW"
+picName=$(echo $(curl -s $xmlURL) | grep -oP "<urlBase>(.*)</urlBase>" | cut -d ">" -f 2 | cut -d "<" -f 1)
+picURL="http://www.bing.com${picName}_1920x1080.jpg"
+
+curl -s -o $HOME/.wallpaper.jpg $picURL
+feh --bg-scale $HOME/.wallpaper.jpg
+

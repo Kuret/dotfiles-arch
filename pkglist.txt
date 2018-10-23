@@ -22,3 +22,39 @@ sublime
 inotify-tools
 polybar? dunst?
 ls_extended
+unclutter
+xss-lock
+gnome-keyring
+autocutsel
+nitrogen
+autorandr
+libinput-gestures
+nextcloud
+hipchat
+xdg-utils
+sxhkd
+xtitle
+xmodmap
+alsa-utils
+alsa-tools
+acpilight
+xsetroot
+xrdb
+xorg-fonts
+gnome-themes-standard
+lxappearance
+curl
+ImageMagick
+feh
+libvlc
+python-keybinder
+python3-gobject
+python3-dbus
+libnotify
+gnupg
+unzip
+jshon + jansson-devel
+gocode gogetdoc goimports
+gpm + synaptics
+
+for ASDF: make automake autoconf readline-devel ncurses-devel libressl-devel libyaml-devel libxslt-devel libffi-devel libtool unixodbc-devel

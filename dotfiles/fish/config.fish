@@ -1,7 +1,7 @@
 # Start X at login
 if status --is-login
-    if test -z "$DISPLAY" -a $XDG_VTNR = 1
-        exec startx
+    if test -z "$DISPLAY"
+      exec startx
     end
 end
 
@@ -20,9 +20,17 @@ source ~/.asdf/asdf.fish
 set -gx KERL_CONFIGURE_OPTIONS "--disable-debug --without-javac"
 
 # Set PATH
-set -gx PATH $HOME/bin $HOME/.local/bin $npm_packages/bin /var/lib/snapd/snap/bin $PATH
+set -gx PATH $HOME/bin $HOME/go/bin $HOME/.local/bin $PATH
 
 # Aliases
+
+# General stuff
+function wttr --argument-names 'location'
+  if test -z "$argv"; set -x location Groningen; end
+  curl wttr.in/$location
+end
+
+# Dev stuff
 alias db "mix deps.get; and yarn; and node_modules/brunch/bin/brunch build; and mix ecto.migrate"
 alias dms "mix deps.get; and yarn; and node_modules/brunch/bin/brunch build; and mix phx.server"
 alias dup "git checkout master; and git pull --rebase; and mix deps.get; and mix ecto.migrate; and yarn; and node_modules/brunch/bin/brunch build"
@@ -57,4 +65,5 @@ function fe; kak (rofi-files $argv); end
 # Launch a command and disown it
 function kbye; fish -c "$argv & disown"; end
 
-fortune | cowsay | lolcat
+fortune | cowsay
+# | lolcat

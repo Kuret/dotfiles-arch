@@ -1,65 +1,44 @@
 #!/bin/sh
-#if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
-#  eval `dbus-launch --sh-syntax --exit-with-session`
-#fi
 
-#export DESKTOP_SESSION=gnome
-
-if [ -d /etc/X11/xinit/xinitrc.d ] ; then
-    for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
-        [ -x "$f" ] && . "$f"
-    done
-    unset f
-fi
-
-# Xresources
-xrdb -load ~/.Xresources
-
-# DPMS, Sleep, Lock
+# Screensaver, lockscreen, xrdb, keymap
 xset dpms 900 900 900
 xset s 540 60
-
-# Set default X cursor
-xsetroot -cursor_name left_ptr
-
-# Autolock
 xss-lock -n "notify-send -i dialog-password 'Lockscreen' 'Locking in 60 seconds'" -l slock &
+xrdb ~/.Xresources
+setxkbmap -layout us
+xmodmap -e 'clear Lock'
+xmodmap -e 'keycode 66 = Escape'
+xmodmap -e 'keycode 9 = Caps_Lock'
+xmodmap -e 'add Lock = Caps_Lock'
+xmodmap -e 'keycode 112 = Left'
+xmodmap -e 'keycode 117 = Right'
+xsetroot -cursor_name left_ptr
+libinput-gestures-setup start &
+xbanish &
+#dunst &
+killall notification-daemon &> /dev/null
+statnot &
 
-# Keyring
 eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 
-# Remap some keyboard keys
-~/bin/keys.sh
+#SXHKD_SHELL=/usr/bin/bash sxhkd &
+#exec bspwm & wmpid=$!
+#exec 2bwm & wmpid=$!
+#exec subtle & wmpid=$!
+exec dwm & wmpid=$!
 
-# Clipboard sync
-xcsyncd &
-
-# Notifications
-dunst &
-
-#  Launch WM / Compositor / Background / Screen layout
-exec bspwm & wmpid=$!
 compton --config ~/.config/compton.conf &
-nitrogen --restore
 autorandr --change
+#~/bin/poly.sh
+feh --bg-scale --randomize ~/Pictures/Wallpapers
 
-# Flash windows on focus
-flashfocus &
-
-# Touchpas gestures
-libinput-gestures-setup start &
-
-# Hide mousecursor when not moving
-unclutter &
-
-# Start applications
-env KEYBASE_START_UI=hideWindow run_keybase &
+#stalonetray &
+nm-applet &
 keepassxc &
-nextcloud &
-kshare -b &
-hipchat4 &
-
+flameshot &
+hipchat &
+flatpak run org.nextcloud.Nextcloud &
 alacritty &
 
 wait $wmpid

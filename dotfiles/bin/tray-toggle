@@ -1,0 +1,4 @@
+#!/bin/bash
+
+TRAY_ID="$(xwininfo -name stalonetray 2>/dev/null | awk '/Window id/ {print $4}')"
+[ -n "$TRAY_ID" ] && bspc node $TRAY_ID -g hidden

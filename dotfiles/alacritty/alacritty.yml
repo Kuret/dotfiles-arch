@@ -21,7 +21,7 @@ font:
 
 colors:
   primary:
-    background: '0x000000'
+    background: '0x1d2021'
     foreground: '0xebdbb2'
   normal:
     black:   '0x282828'
@@ -42,7 +42,7 @@ colors:
     cyan:    '0x8ec07c'
     white:   '0xebdbb2'
 
-background_opacity: 0.75
+background_opacity: 1
 
 mouse_bindings:
 - { mouse: Middle, action: PasteSelection }
