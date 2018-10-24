@@ -12,12 +12,10 @@ xmodmap -e 'keycode 9 = Caps_Lock'
 xmodmap -e 'add Lock = Caps_Lock'
 xmodmap -e 'keycode 112 = Left'
 xmodmap -e 'keycode 117 = Right'
+xsetroot -bg "#282828"
 xsetroot -cursor_name left_ptr
-libinput-gestures-setup start &
 xbanish &
-#dunst &
-killall notification-daemon &> /dev/null
-statnot &
+dunst &
 
 eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
@@ -25,13 +23,12 @@ export SSH_AUTH_SOCK
 #SXHKD_SHELL=/usr/bin/bash sxhkd &
 #exec bspwm & wmpid=$!
 #exec 2bwm & wmpid=$!
-#exec subtle & wmpid=$!
 exec dwm & wmpid=$!
 
 compton --config ~/.config/compton.conf &
 autorandr --change
 #~/bin/poly.sh
-feh --bg-scale --randomize ~/Pictures/Wallpapers
+~/bin/statusline
 
 #stalonetray &
 nm-applet &
@@ -39,6 +36,6 @@ keepassxc &
 flameshot &
 hipchat &
 flatpak run org.nextcloud.Nextcloud &
-alacritty &
+st &
 
 wait $wmpid
